@@ -1,12 +1,13 @@
 import { Link } from "@tanstack/react-router";
 
-const links = [
+type NavLink = { to: string; label: string; exact?: boolean };
+const links: NavLink[] = [
   { to: "/", label: "Home", exact: true },
   { to: "/about", label: "About" },
   { to: "/experience", label: "Experience" },
   { to: "/projects", label: "Projects" },
   { to: "/contact", label: "Contact" },
-] as const;
+];
 
 export function SiteNav() {
   return (
@@ -22,7 +23,7 @@ export function SiteNav() {
           {links.map((l) => (
             <Link
               key={l.to}
-              to={l.to}
+              to={l.to as "/"}
               activeOptions={{ exact: l.exact }}
               activeProps={{
                 className:
