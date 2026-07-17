@@ -156,11 +156,26 @@ function AboutPage() {
                   className="max-h-[70vh] w-auto object-contain"
                 />
               ) : (
-                <iframe
-                  src={openCert.file.url}
-                  title={openCert.title}
-                  className="h-[70vh] w-full"
-                />
+                <div className="flex flex-col items-center gap-4 text-center">
+                  <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
+                    PDF document
+                  </p>
+                  <a
+                    href={openCert.file.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
+                  >
+                    Open certificate in new tab →
+                  </a>
+                  <a
+                    href={openCert.file.url}
+                    download
+                    className="text-xs text-muted-foreground underline underline-offset-4 hover:text-accent"
+                  >
+                    Download PDF
+                  </a>
+                </div>
               )
             ) : (
               <p className="font-mono text-xs uppercase tracking-[0.2em] text-muted-foreground">
