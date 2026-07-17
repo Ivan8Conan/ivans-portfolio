@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { SectionHeading } from "@/components/section-heading";
 import { TechPill } from "@/components/tech-pill";
 import {
@@ -42,6 +42,43 @@ export const Route = createFileRoute("/about")({
 
 function AboutPage() {
   const [openCert, setOpenCert] = useState<Certification | null>(null);
+  const [blobUrl, setBlobUrl] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
+  const [loadError, setLoadError] = useState(false);
+
+  useEffect(() => {
+    if (!openCert?.file || openCert.file.type !== "pdf") {
+      setBlobUrl(null);
+      setLoadError(false);
+      return;
+    }
+    let cancelled = false;
+    let createdUrl: string | null = null;
+    setLoading(true);
+    setLoadError(false);
+    setBlobUrl(null);
+    fetch(openCert.file.url)
+      .then((r) => {
+        if (!r.ok) throw new Error(`HTTP ${r.status}`);
+        return r.blob();
+      })
+      .then((b) => {
+        if (cancelled) return;
+        createdUrl = URL.createObjectURL(b);
+        setBlobUrl(createdUrl);
+      })
+      .catch(() => {
+        if (!cancelled) setLoadError(true);
+      })
+      .finally(() => {
+        if (!cancelled) setLoading(false);
+      });
+    return () => {
+      cancelled = true;
+      if (createdUrl) URL.revokeObjectURL(createdUrl);
+    };
+  }, [openCert]);
+
   return (
     <div className="mx-auto max-w-6xl px-6 py-16 sm:py-24">
       <SectionHeading
