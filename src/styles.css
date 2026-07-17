@@ -154,8 +154,3 @@
     color: var(--color-accent-foreground);
   }
 }
-
-@utility font-mono {
-  font-family: var(--font-mono);
-  font-feature-settings: "zero", "ss02";
-}
