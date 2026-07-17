@@ -1,4 +1,10 @@
 import type { Project } from "@/components/project-card";
+import certMbkm from "@/assets/cert-mbkm-msib.pdf.asset.json";
+import certClaudePlatform from "@/assets/cert-claude-platform-101.pdf.asset.json";
+import certClaudeCode from "@/assets/cert-claude-code-101.pdf.asset.json";
+import certAgents from "@/assets/cert-agents-workflows.pdf.asset.json";
+import certAppliedAi from "@/assets/cert-applied-ai-foundations.pdf.asset.json";
+import certWadhwani from "@/assets/cert-wadhwani.pdf.asset.json";
 
 export const profile = {
   name: "Ivan Conanta",
@@ -198,18 +204,30 @@ export const certifications: Certification[] = [
   {
     title:
       "MBKM MSIB Batch 7 — Android Mobile Developer at MojadiApp, 2024.",
+    file: { url: certMbkm.url, type: "pdf" },
   },
   {
     title:
-      "Anthropic Academy — Claude Platform 101, Claude Code 101, July 2026.",
+      "Anthropic Academy — Claude Platform 101, July 2026.",
+    file: { url: certClaudePlatform.url, type: "pdf" },
+  },
+  {
+    title: "Anthropic Academy — Claude Code 101, July 2026.",
+    file: { url: certClaudeCode.url, type: "pdf" },
   },
   {
     title:
-      "OpenAI Academy — Agents & Workflows, Applied AI Foundations, July 2026.",
+      "OpenAI Academy — Agents & Workflows, July 2026.",
+    file: { url: certAgents.url, type: "pdf" },
+  },
+  {
+    title: "OpenAI Academy — Applied AI Foundations, July 2026.",
+    file: { url: certAppliedAi.url, type: "pdf" },
   },
   {
     title:
       "Effective Workplace Skills — Wadhwani Foundation via UKDW, Dec 2024.",
+    file: { url: certWadhwani.url, type: "pdf" },
   },
 ];
 
