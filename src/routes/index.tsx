@@ -8,17 +8,17 @@ export const Route = createFileRoute("/")({
   component: Index,
   head: () => ({
     meta: [
-      { title: "Ivan Conanta — Mobile & Applied Computer Vision Engineer" },
+      { title: "Ivan Conanta — Mobile Developer & AI Engineer" },
       {
         name: "description",
         content:
           "Portfolio of Ivan Conanta. Real-time on-device pose estimation, Flutter mobile apps, and full-stack systems shipped to production.",
       },
-      { property: "og:title", content: "Ivan Conanta — Mobile & Applied CV Engineer" },
+      { property: "og:title", content: "Ivan Conanta — Mobile Developer & AI Engineer" },
       {
         property: "og:description",
         content:
-          "Shipped a real-time pose-estimation Android app to the Play Store — 86.7% accuracy, 3–7 ms on-device inference.",
+          "Portfolio of Ivan Conanta. Real-time on-device pose estimation, Flutter mobile apps, and full-stack systems shipped to production.",
       },
       { property: "og:url", content: "/" },
     ],
