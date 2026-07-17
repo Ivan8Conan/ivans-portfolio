@@ -185,11 +185,32 @@ export const education = [
   },
 ];
 
-export const certifications = [
-  "Intellectual Property Rights Certificate (Hak Cipta Kekayaan Intelektual) — MyDeadliftCoach App, 2026.",
-  "Anthropic Academy — Claude Platform 101, Claude Code 101, July 2026.",
-  "OpenAI Academy — Agents & Workflows, Applied AI Foundations, July 2026.",
-  "Effective Workplace Skills — Wadhwani Foundation via UKDW, Dec 2024.",
+export type Certification = {
+  title: string;
+  file?: { url: string; type: "image" | "pdf" };
+};
+
+export const certifications: Certification[] = [
+  {
+    title:
+      "Intellectual Property Rights Certificate (Hak Cipta Kekayaan Intelektual) — MyDeadliftCoach App, 2026.",
+  },
+  {
+    title:
+      "MBKM MSIB Batch 7 — Android Mobile Developer at MojadiApp, 2024.",
+  },
+  {
+    title:
+      "Anthropic Academy — Claude Platform 101, Claude Code 101, July 2026.",
+  },
+  {
+    title:
+      "OpenAI Academy — Agents & Workflows, Applied AI Foundations, July 2026.",
+  },
+  {
+    title:
+      "Effective Workplace Skills — Wadhwani Foundation via UKDW, Dec 2024.",
+  },
 ];
 
 export const activities = [
