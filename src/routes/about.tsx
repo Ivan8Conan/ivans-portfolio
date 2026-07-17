@@ -193,25 +193,46 @@ function AboutPage() {
                   className="max-h-[70vh] w-auto object-contain"
                 />
               ) : (
-                <div className="flex flex-col items-center gap-4 text-center">
-                  <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
-                    PDF document
-                  </p>
-                  <a
-                    href={openCert.file.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
-                  >
-                    Open certificate in new tab →
-                  </a>
-                  <a
-                    href={openCert.file.url}
-                    download
-                    className="text-xs text-muted-foreground underline underline-offset-4 hover:text-accent"
-                  >
-                    Download PDF
-                  </a>
+                <div className="flex w-full flex-col items-center gap-3">
+                  {loading ? (
+                    <div className="flex h-[70vh] w-full flex-col items-center justify-center gap-3">
+                      <div
+                        aria-hidden
+                        className="h-8 w-8 animate-spin rounded-full border-2 border-muted border-t-accent"
+                      />
+                      <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
+                        Loading certificate…
+                      </p>
+                    </div>
+                  ) : loadError ? (
+                    <div className="flex h-[70vh] w-full flex-col items-center justify-center gap-3 text-center">
+                      <p className="text-sm text-muted-foreground">
+                        Could not load the certificate preview.
+                      </p>
+                      <a
+                        href={openCert.file.url}
+                        download
+                        className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
+                      >
+                        Download PDF
+                      </a>
+                    </div>
+                  ) : blobUrl ? (
+                    <>
+                      <iframe
+                        src={blobUrl}
+                        title={openCert.title}
+                        className="h-[70vh] w-full rounded-md border border-border bg-background"
+                      />
+                      <a
+                        href={blobUrl}
+                        download={openCert.file.url.split("/").pop() ?? "certificate.pdf"}
+                        className="text-xs text-muted-foreground underline underline-offset-4 hover:text-accent"
+                      >
+                        Download PDF
+                      </a>
+                    </>
+                  ) : null}
                 </div>
               )
             ) : (
