@@ -12,10 +12,10 @@ export type Project = {
 
 export function ProjectCard({ project }: { project: Project }) {
   return (
-    <article className="group flex flex-col gap-4 border-t border-border pt-6">
+    <article className="group flex flex-col gap-4 border-t border-border pt-6 transition-colors duration-300 hover:border-accent/60">
       <header className="flex flex-col gap-2">
         <div className="flex items-baseline justify-between gap-4">
-          <h3 className="text-lg font-semibold tracking-tight text-foreground">
+          <h3 className="text-lg font-semibold tracking-tight text-foreground transition-colors duration-300 group-hover:text-accent">
             {project.title}
           </h3>
           <span className="font-mono text-xs text-muted-foreground">
@@ -28,7 +28,7 @@ export function ProjectCard({ project }: { project: Project }) {
       <ul className="flex flex-col gap-2 text-sm leading-relaxed text-foreground">
         {project.bullets.map((b) => (
           <li key={b} className="flex gap-3">
-            <span aria-hidden className="mt-2 h-px w-3 shrink-0 bg-accent" />
+            <span aria-hidden className="mt-2 h-px w-3 shrink-0 bg-accent transition-[width] duration-300 group-hover:w-5" />
             <span>{b}</span>
           </li>
         ))}
@@ -51,9 +51,9 @@ export function ProjectCard({ project }: { project: Project }) {
           href={project.link.href}
           target="_blank"
           rel="noreferrer"
-          className="font-mono text-xs uppercase tracking-wider text-foreground underline decoration-accent decoration-2 underline-offset-4 transition-opacity hover:opacity-70"
+          className="inline-flex w-fit items-center gap-1 font-mono text-xs uppercase tracking-wider text-foreground underline decoration-accent decoration-2 underline-offset-4 transition-all duration-200 hover:underline-offset-[6px] hover:opacity-80 [&>span]:transition-transform [&>span]:duration-200 hover:[&>span]:translate-x-1"
         >
-          {project.link.label} →
+          {project.link.label} <span aria-hidden>→</span>
         </a>
       ) : null}
     </article>
