@@ -15,9 +15,10 @@ export function SiteNav() {
       <div className="mx-auto flex h-14 max-w-6xl items-center justify-between px-6">
         <Link
           to="/"
-          className="font-mono text-sm font-medium tracking-tight text-foreground"
+          className="group font-mono text-sm font-medium tracking-tight text-foreground"
         >
-          ivan.conanta<span className="text-accent">_</span>
+          ivan.conanta
+          <span className="text-accent inline-block animate-caret group-hover:translate-x-0.5 transition-transform">_</span>
         </Link>
         <nav className="flex items-center gap-1 text-sm">
           {links.map((l) => (
@@ -30,7 +31,7 @@ export function SiteNav() {
                   "text-foreground after:scale-x-100",
               }}
               inactiveProps={{ className: "text-muted-foreground" }}
-              className="relative px-3 py-2 transition-colors hover:text-foreground after:absolute after:inset-x-3 after:bottom-1 after:h-px after:origin-left after:scale-x-0 after:bg-accent after:transition-transform"
+              className="relative px-3 py-2 transition-colors duration-200 hover:text-foreground after:absolute after:inset-x-3 after:bottom-1 after:h-px after:origin-left after:scale-x-0 after:bg-accent after:transition-transform after:duration-300 hover:after:scale-x-100"
             >
               {l.label}
             </Link>
