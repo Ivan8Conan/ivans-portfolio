@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { Metric } from "@/components/metric";
 import { SectionHeading } from "@/components/section-heading";
 import { ProjectCard } from "@/components/project-card";
+import { Reveal } from "@/components/reveal";
 import { metrics, profile, projects } from "@/lib/portfolio-data";
 
 export const Route = createFileRoute("/")({
@@ -46,13 +47,13 @@ function Index() {
           <div className="mt-10 flex flex-wrap gap-3">
             <Link
               to="/projects"
-              className="inline-flex items-center gap-2 rounded-sm bg-foreground px-4 py-2.5 font-mono text-xs uppercase tracking-wider text-background transition-opacity hover:opacity-90"
+              className="group lift press inline-flex items-center gap-2 rounded-sm bg-foreground px-4 py-2.5 font-mono text-xs uppercase tracking-wider text-background hover:opacity-95"
             >
-              View projects →
+              View projects <span aria-hidden className="transition-transform duration-200 group-hover:translate-x-1">→</span>
             </Link>
             <Link
               to="/contact"
-              className="inline-flex items-center gap-2 rounded-sm border border-border px-4 py-2.5 font-mono text-xs uppercase tracking-wider text-foreground transition-colors hover:border-foreground"
+              className="lift press inline-flex items-center gap-2 rounded-sm border border-border px-4 py-2.5 font-mono text-xs uppercase tracking-wider text-foreground hover:border-foreground hover:bg-secondary/60"
             >
               Get in touch
             </Link>
@@ -75,8 +76,10 @@ function Index() {
       </section>
 
       <section className="grid grid-cols-2 gap-6 border-t border-border py-10 sm:grid-cols-4">
-        {metrics.map((m) => (
-          <Metric key={m.label} value={m.value} label={m.label} />
+        {metrics.map((m, i) => (
+          <Reveal key={m.label} delay={i * 80}>
+            <Metric value={m.value} label={m.label} />
+          </Reveal>
         ))}
       </section>
 
@@ -92,15 +95,15 @@ function Index() {
           }
         />
         <div className="grid gap-10 lg:grid-cols-12">
-          <div className="lg:col-span-8">
+          <Reveal className="lg:col-span-8">
             <ProjectCard project={featured} />
-          </div>
+          </Reveal>
           <div className="lg:col-span-4">
             <Link
               to="/projects"
-              className="block border-t border-border pt-6 font-mono text-xs uppercase tracking-wider text-muted-foreground transition-colors hover:text-foreground"
+              className="group block border-t border-border pt-6 font-mono text-xs uppercase tracking-wider text-muted-foreground transition-colors hover:text-foreground"
             >
-              See all projects →
+              See all projects <span aria-hidden className="inline-block transition-transform duration-200 group-hover:translate-x-1">→</span>
             </Link>
           </div>
         </div>
