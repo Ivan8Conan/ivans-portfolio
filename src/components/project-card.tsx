@@ -1,6 +1,8 @@
+import { Link } from "@tanstack/react-router";
 import { TechPill } from "./tech-pill";
 
 export type Project = {
+  slug: string;
   title: string;
   role: string;
   year: string;
@@ -16,7 +18,13 @@ export function ProjectCard({ project }: { project: Project }) {
       <header className="flex flex-col gap-2">
         <div className="flex items-baseline justify-between gap-4">
           <h3 className="text-lg font-semibold tracking-tight text-foreground transition-colors duration-300 group-hover:text-accent">
-            {project.title}
+            <Link
+              to="/projects/$slug"
+              params={{ slug: project.slug }}
+              className="story-link outline-none focus-visible:text-accent"
+            >
+              {project.title}
+            </Link>
           </h3>
           <span className="font-mono text-xs text-muted-foreground">
             {project.year}
@@ -56,6 +64,14 @@ export function ProjectCard({ project }: { project: Project }) {
           {project.link.label} <span aria-hidden>→</span>
         </a>
       ) : null}
+
+      <Link
+        to="/projects/$slug"
+        params={{ slug: project.slug }}
+        className="inline-flex w-fit items-center gap-1 font-mono text-xs uppercase tracking-wider text-foreground/80 transition-all duration-200 hover:text-accent [&>span]:transition-transform [&>span]:duration-200 hover:[&>span]:translate-x-1"
+      >
+        View case study <span aria-hidden>→</span>
+      </Link>
     </article>
   );
 }
