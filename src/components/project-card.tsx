@@ -26,9 +26,7 @@ export function ProjectCard({ project }: { project: Project }) {
               {project.title}
             </Link>
           </h3>
-          <span className="font-mono text-xs text-muted-foreground">
-            {project.year}
-          </span>
+          <span className="font-mono text-xs text-muted-foreground">{project.year}</span>
         </div>
         <p className="text-sm text-muted-foreground">{project.role}</p>
       </header>
@@ -36,7 +34,10 @@ export function ProjectCard({ project }: { project: Project }) {
       <ul className="flex flex-col gap-2 text-sm leading-relaxed text-foreground">
         {project.bullets.map((b) => (
           <li key={b} className="flex gap-3">
-            <span aria-hidden className="mt-2 h-px w-3 shrink-0 bg-accent transition-[width] duration-300 group-hover:w-5" />
+            <span
+              aria-hidden
+              className="mt-2 h-px w-3 shrink-0 bg-accent transition-[width] duration-300 group-hover:w-5"
+            />
             <span>{b}</span>
           </li>
         ))}

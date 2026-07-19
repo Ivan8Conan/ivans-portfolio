@@ -44,8 +44,8 @@ function ContactPage() {
         title="Contact"
         description={
           <>
-            Available for mobile engineering and applied machine learning
-            roles — full-time, remote, or hybrid.
+            Available for mobile engineering and applied machine learning roles — full-time, remote,
+            or hybrid.
           </>
         }
       />
@@ -53,10 +53,7 @@ function ContactPage() {
       <div className="grid gap-12 lg:grid-cols-12">
         <ul className="flex flex-col lg:col-span-8">
           {channels.map((c) => (
-            <li
-              key={c.label}
-              className="grid gap-2 border-t border-border py-6 sm:grid-cols-12"
-            >
+            <li key={c.label} className="grid gap-2 border-t border-border py-6 sm:grid-cols-12">
               <div className="font-mono text-xs uppercase tracking-wider text-muted-foreground sm:col-span-3">
                 {c.label}
               </div>

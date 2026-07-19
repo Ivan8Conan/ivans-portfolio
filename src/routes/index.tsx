@@ -49,7 +49,13 @@ function Index() {
               to="/projects"
               className="group lift press inline-flex items-center gap-2 rounded-sm bg-foreground px-4 py-2.5 font-mono text-xs uppercase tracking-wider text-background hover:opacity-95"
             >
-              View projects <span aria-hidden className="transition-transform duration-200 group-hover:translate-x-1">→</span>
+              View projects{" "}
+              <span
+                aria-hidden
+                className="transition-transform duration-200 group-hover:translate-x-1"
+              >
+                →
+              </span>
             </Link>
             <Link
               to="/contact"
@@ -65,8 +71,8 @@ function Index() {
             Currently
           </span>
           <p className="text-sm leading-relaxed text-foreground">
-            Fresh graduate open to mobile engineering and applied ML roles.
-            Based in {profile.location}.
+            Fresh graduate open to mobile engineering and applied ML roles. Based in{" "}
+            {profile.location}.
           </p>
           <div className="mt-2 font-mono text-xs text-muted-foreground">
             <div>{profile.email}</div>
@@ -89,8 +95,8 @@ function Index() {
           title="Featured"
           description={
             <>
-              Real-time deadlift form correction shipped to the Google Play
-              Store — on-device pose estimation at millisecond latency.
+              Real-time deadlift form correction shipped to the Google Play Store — on-device pose
+              estimation at millisecond latency.
             </>
           }
         />
@@ -103,7 +109,13 @@ function Index() {
               to="/projects"
               className="group block border-t border-border pt-6 font-mono text-xs uppercase tracking-wider text-muted-foreground transition-colors hover:text-foreground"
             >
-              See all projects <span aria-hidden className="inline-block transition-transform duration-200 group-hover:translate-x-1">→</span>
+              See all projects{" "}
+              <span
+                aria-hidden
+                className="inline-block transition-transform duration-200 group-hover:translate-x-1"
+              >
+                →
+              </span>
             </Link>
           </div>
         </div>

@@ -28,16 +28,6 @@ export const Route = createFileRoute("/projects")({
 function ProjectsPage() {
   return (
     <div className="mx-auto max-w-6xl px-6 py-16 sm:py-24">
-      <SectionHeading
-        index="08"
-        title="Projects"
-        description={<>Systems built end-to-end — from data pipeline to shipped product.</>}
-      />
-      <div className="grid gap-12 lg:grid-cols-2">
-        {projects.map((p) => (
-          <ProjectCard key={p.title} project={p} />
-        ))}
-      </div>
       <Outlet />
     </div>
   );

@@ -16,7 +16,7 @@ export function SectionHeading({
 }: SectionHeadingProps) {
   return (
     // ...props di-spread ke container root (mendukung prop id dari parent)
-    <div 
+    <div
       className={`mb-10 flex flex-col gap-3 border-t border-border pt-6 ${className || ""}`.trim()}
       {...props}
     >

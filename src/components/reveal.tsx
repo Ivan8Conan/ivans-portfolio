@@ -1,4 +1,11 @@
-import { useEffect, useRef, useState, type ReactNode, type ElementType, type CSSProperties } from "react";
+import {
+  useEffect,
+  useRef,
+  useState,
+  type ReactNode,
+  type ElementType,
+  type CSSProperties,
+} from "react";
 import { cn } from "@/lib/utils";
 
 type RevealProps = {
@@ -9,13 +16,7 @@ type RevealProps = {
   once?: boolean;
 };
 
-export function Reveal({
-  children,
-  as,
-  delay = 0,
-  className,
-  once = true,
-}: RevealProps) {
+export function Reveal({ children, as, delay = 0, className, once = true }: RevealProps) {
   const Tag = (as ?? "div") as ElementType;
   const ref = useRef<HTMLElement | null>(null);
   const [shown, setShown] = useState(false);
@@ -48,11 +49,7 @@ export function Reveal({
     delay > 0 ? { transitionDelay: `${delay}ms` } : undefined;
 
   return (
-    <Tag
-      ref={ref as never}
-      style={style}
-      className={cn("reveal", shown && "reveal-in", className)}
-    >
+    <Tag ref={ref as never} style={style} className={cn("reveal", shown && "reveal-in", className)}>
       {children}
     </Tag>
   );

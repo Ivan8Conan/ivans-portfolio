@@ -31,9 +31,7 @@ function ExperiencePage() {
       <SectionHeading
         index="07"
         title="Professional Experience"
-        description={
-          <>Action-oriented engineering work with measurable production impact.</>
-        }
+        description={<>Action-oriented engineering work with measurable production impact.</>}
       />
 
       <ul className="flex flex-col">
@@ -53,9 +51,7 @@ function ExperiencePage() {
               ) : null}
             </div>
             <div className="sm:col-span-9">
-              <h3 className="text-lg font-semibold tracking-tight text-foreground">
-                {e.role}
-              </h3>
+              <h3 className="text-lg font-semibold tracking-tight text-foreground">{e.role}</h3>
               <p className="mt-1 text-sm text-muted-foreground">{e.org}</p>
               {e.subtitle ? (
                 <p className="mt-3 border-l-2 border-accent pl-3 text-sm italic text-foreground">

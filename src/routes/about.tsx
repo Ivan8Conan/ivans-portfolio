@@ -9,13 +9,7 @@ import {
   DialogTitle,
   DialogDescription,
 } from "@/components/ui/dialog";
-import {
-  activities,
-  certifications,
-  competencies,
-  education,
-  profile,
-} from "@/lib/portfolio-data";
+import { activities, certifications, competencies, education, profile } from "@/lib/portfolio-data";
 import type { Certification } from "@/lib/portfolio-data";
 
 export const Route = createFileRoute("/about")({
@@ -86,17 +80,17 @@ function AboutPage() {
         title="About"
         description={
           <>
-            Informatics graduate (UKDW, 2022–2026) specializing in mobile
-            development and on-device machine learning. Focus on shipping
-            measurable systems from data pipeline to production release.
+            Informatics graduate (UKDW, 2022–2026) specializing in mobile development and on-device
+            machine learning. Focus on shipping measurable systems from data pipeline to production
+            release.
           </>
         }
       />
 
       <p className="max-w-3xl text-base leading-relaxed text-muted-foreground">
-        Hands-on across the mobile stack (Flutter, Dart, Android, Firebase)
-        with additional full-stack experience in PHP/MySQL and Java desktop
-        applications. Located in {profile.location}.
+        Hands-on across the mobile stack (Flutter, Dart, Android, Firebase) with additional
+        full-stack experience in PHP/MySQL and Java desktop applications. Located in{" "}
+        {profile.location}.
       </p>
 
       <section className="mt-20">
@@ -121,21 +115,14 @@ function AboutPage() {
         <SectionHeading index="04" title="Education" />
         <ul className="flex flex-col">
           {education.map((e) => (
-            <li
-              key={e.school}
-              className="grid gap-2 border-t border-border py-6 sm:grid-cols-12"
-            >
+            <li key={e.school} className="grid gap-2 border-t border-border py-6 sm:grid-cols-12">
               <div className="font-mono text-xs uppercase tracking-wider text-muted-foreground sm:col-span-3">
                 {e.timeframe}
               </div>
               <div className="sm:col-span-9">
-                <h3 className="text-base font-semibold text-foreground">
-                  {e.degree}
-                </h3>
+                <h3 className="text-base font-semibold text-foreground">{e.degree}</h3>
                 <p className="text-sm text-muted-foreground">{e.school}</p>
-                <p className="mt-2 text-sm leading-relaxed text-foreground">
-                  {e.detail}
-                </p>
+                <p className="mt-2 text-sm leading-relaxed text-foreground">{e.detail}</p>
                 {e.coursework ? (
                   <p className="mt-1 font-mono text-xs text-muted-foreground">
                     Coursework: {e.coursework}
@@ -159,9 +146,7 @@ function AboutPage() {
                 aria-label={`View certificate: ${c.title}`}
               >
                 <span aria-hidden className="mt-2 h-px w-3 shrink-0 bg-accent" />
-                <span className="flex-1 underline-offset-4 group-hover:underline">
-                  {c.title}
-                </span>
+                <span className="flex-1 underline-offset-4 group-hover:underline">{c.title}</span>
                 <span
                   aria-hidden
                   className="mt-0.5 font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground group-hover:text-accent"

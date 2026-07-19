@@ -94,10 +94,26 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "twitter:card", content: "summary_large_image" },
       { property: "og:title", content: "Ivan Conanta — Mobile Developer & AI Engineer" },
       { name: "twitter:title", content: "Ivan Conanta — Mobile Developer & AI Engineer" },
-      { property: "og:description", content: "Portfolio of Ivan Conanta. Real-time on-device pose estimation, Flutter mobile apps, and full-stack systems shipped to production." },
-      { name: "twitter:description", content: "Portfolio of Ivan Conanta. Real-time on-device pose estimation, Flutter mobile apps, and full-stack systems shipped to production." },
-      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/914f0fc7-a170-486e-86f9-764358a43332/id-preview-af276de2--98880262-4570-4cb7-b83c-f89e5adab1fa.lovable.app-1784283902867.png" },
-      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/914f0fc7-a170-486e-86f9-764358a43332/id-preview-af276de2--98880262-4570-4cb7-b83c-f89e5adab1fa.lovable.app-1784283902867.png" },
+      {
+        property: "og:description",
+        content:
+          "Portfolio of Ivan Conanta. Real-time on-device pose estimation, Flutter mobile apps, and full-stack systems shipped to production.",
+      },
+      {
+        name: "twitter:description",
+        content:
+          "Portfolio of Ivan Conanta. Real-time on-device pose estimation, Flutter mobile apps, and full-stack systems shipped to production.",
+      },
+      {
+        property: "og:image",
+        content:
+          "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/914f0fc7-a170-486e-86f9-764358a43332/id-preview-af276de2--98880262-4570-4cb7-b83c-f89e5adab1fa.lovable.app-1784283902867.png",
+      },
+      {
+        name: "twitter:image",
+        content:
+          "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/914f0fc7-a170-486e-86f9-764358a43332/id-preview-af276de2--98880262-4570-4cb7-b83c-f89e5adab1fa.lovable.app-1784283902867.png",
+      },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
