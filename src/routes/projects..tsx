@@ -5,7 +5,7 @@ import { Metric } from "@/components/metric";
 import { Reveal } from "@/components/reveal";
 import { projectDetails, projects } from "@/lib/portfolio-data";
 
-export const Route = createFileRoute("/projects/$slug")({
+export const Route = createFileRoute("/projects/")({
   loader: ({ params }) => {
     const detail = projectDetails[params.slug];
     if (!detail) throw notFound();
