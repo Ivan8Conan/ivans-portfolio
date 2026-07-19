@@ -113,6 +113,7 @@ export const experience: Experience[] = [
 
 export const projects: Project[] = [
   {
+    slug: "mydeadliftcoach",
     title: "MyDeadliftCoach",
     role: "Solo build · Thesis · Published on Google Play Store",
     year: "2026",
@@ -133,6 +134,7 @@ export const projects: Project[] = [
       "Deployed to Google Play Store · Intellectual Property Rights Certificate granted",
   },
   {
+    slug: "tastivo",
     title: "Tastivo",
     role: "MSIB Batch 7 · Android Mobile Developer at MojadiApp",
     year: "2024",
@@ -150,6 +152,7 @@ export const projects: Project[] = [
     ],
   },
   {
+    slug: "concert-ticket-booking",
     title: "Concert Ticket Booking Platform",
     role: "Team project · Owned booking-detail module end-to-end",
     year: "2023",
@@ -161,6 +164,7 @@ export const projects: Project[] = [
     ],
   },
   {
+    slug: "memby",
     title: "MEMBY — Subscription Management Desktop App",
     role: "Team project · Owned backend and data layer",
     year: "2023",
