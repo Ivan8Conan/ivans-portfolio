@@ -1,16 +1,25 @@
-import type { ReactNode } from "react";
+import type { ReactNode, HTMLAttributes } from "react";
+
+// Ekstensikan HTMLAttributes agar komponen mendukung id, aria-*, dan atribut standar DOM lainnya.
+export interface SectionHeadingProps extends HTMLAttributes<HTMLDivElement> {
+  index: string;
+  title: string;
+  description?: ReactNode;
+}
 
 export function SectionHeading({
   index,
   title,
   description,
-}: {
-  index: string;
-  title: string;
-  description?: ReactNode;
-}) {
+  className,
+  ...props
+}: SectionHeadingProps) {
   return (
-    <div className="mb-10 flex flex-col gap-3 border-t border-border pt-6">
+    // ...props di-spread ke container root (mendukung prop id dari parent)
+    <div 
+      className={`mb-10 flex flex-col gap-3 border-t border-border pt-6 ${className || ""}`.trim()}
+      {...props}
+    >
       <span className="font-mono text-xs uppercase tracking-[0.2em] text-muted-foreground">
         {index} / {title}
       </span>

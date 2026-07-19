@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Outlet } from "@tanstack/react-router";
 import { SectionHeading } from "@/components/section-heading";
 import { ProjectCard } from "@/components/project-card";
 import { projects } from "@/lib/portfolio-data";
@@ -38,6 +38,7 @@ function ProjectsPage() {
           <ProjectCard key={p.title} project={p} />
         ))}
       </div>
+      <Outlet />
     </div>
   );
 }
