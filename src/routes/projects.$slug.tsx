@@ -1,5 +1,5 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { SectionHeading } from "@/components/section-heading";
 import { TechPill } from "@/components/tech-pill";
 import { Reveal } from "@/components/reveal";
@@ -54,20 +54,36 @@ function ProjectDetailPage() {
   const { detail: d } = Route.useLoaderData();
   const currentIndex = projects.findIndex((p) => p.slug === d.slug);
   const next = currentIndex >= 0 ? projects[(currentIndex + 1) % projects.length] : null;
+  const [showTopShortcut, setShowTopShortcut] = useState(false);
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "instant" });
   }, []);
 
+  useEffect(() => {
+    const onScroll = () => {
+      setShowTopShortcut(window.scrollY > window.innerHeight * 0.75);
+    };
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  const scrollToTop = () => window.scrollTo({ top: 0, behavior: "smooth" });
+
   return (
-    <div className="flex flex-col gap-6">
-      <Link
-        to="/projects"
-        className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.28em] text-muted-foreground transition-colors hover:text-foreground"
-      >
-        <span aria-hidden>←</span>
-        Back to projects
-      </Link>
+    <div className="relative flex flex-col gap-6">
+      <div className="flex justify-end">
+        <Link
+          to="/projects"
+          className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.28em] text-muted-foreground transition-colors hover:text-foreground"
+        >
+          <span aria-hidden>←</span>
+          Back to projects
+        </Link>
+      </div>
 
       <header className="space-y-4 border-b border-border pb-8">
         <p className="text-xs uppercase tracking-[0.35em] text-muted-foreground">Project detail</p>
@@ -220,24 +236,38 @@ function ProjectDetailPage() {
       ) : null}
 
       {next && next.slug !== d.slug ? (
-        <div className="mt-16 rounded-3xl border border-border bg-card p-6">
-          <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-            <div>
-              <p className="text-xs uppercase tracking-[0.35em] text-muted-foreground">
-                Next case study
-              </p>
-              <p className="mt-2 text-lg font-semibold text-foreground">{next.title}</p>
+        <>
+          {showTopShortcut ? (
+            <div className="mt-16 flex justify-end">
+              <button
+                type="button"
+                onClick={scrollToTop}
+                className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-border bg-background text-base text-foreground transition hover:border-accent hover:text-accent"
+                aria-label="Scroll to top"
+              >
+                <span aria-hidden>↑</span>
+              </button>
             </div>
-            <Link
-              to="/projects/$slug"
-              params={{ slug: next.slug }}
-              className="inline-flex items-center gap-2 rounded-full border border-border bg-background px-4 py-2 text-xs uppercase tracking-[0.35em] text-foreground transition hover:border-accent hover:text-accent"
-            >
-              Continue
-              <span aria-hidden>→</span>
-            </Link>
+          ) : null}
+          <div className="mt-6 rounded-3xl border border-border bg-card p-6">
+            <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+              <div>
+                <p className="text-xs uppercase tracking-[0.35em] text-muted-foreground">
+                  Next case study
+                </p>
+                <p className="mt-2 text-lg font-semibold text-foreground">{next.title}</p>
+              </div>
+              <Link
+                to="/projects/$slug"
+                params={{ slug: next.slug }}
+                className="inline-flex items-center gap-2 rounded-full border border-border bg-background px-4 py-2 text-xs uppercase tracking-[0.35em] text-foreground transition hover:border-accent hover:text-accent"
+              >
+                Continue
+                <span aria-hidden>→</span>
+              </Link>
+            </div>
           </div>
-        </div>
+        </>
       ) : null}
     </div>
   );

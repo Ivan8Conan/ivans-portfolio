@@ -642,8 +642,14 @@ export const projectDetails: Record<string, ProjectDetail> = {
       "Source code collaboratively managed by a 4-person team on GitHub.",
     ],
     lessons: [
-      "Database Integration (JDBC): bridging a standalone desktop app to relational MySQL via the JDBC driver.",
+      "Database Integration (JDBC): Gained hands-on experience integrating standalone desktop applications with relational MySQL databases using the JDBC driver.",
+      "MVC Pattern on Desktop: Developed a strong understanding of the Model–View–Controller (MVC) architecture by separating the visual interface (View – FXML), application logic (Controller – Java), and data layer (Model – MySQL).",
+      "Date/Time Manipulation: Learned to implement date and timestamp processing logic in Java and SQL to build accurate automated reminder functionality.",
     ],
-    future: [],
+    future: [
+      "Cloud Database Migration: Migrate the MySQL database from a local localhost environment to a cloud-hosted solution (e.g., AWS RDS) to enable data synchronization across multiple devices.",
+      "Email Notification Integration: Integrate a third-party library (e.g., JavaMail API) to automatically send subscription expiration reminders via email, even when the application is not running.",
+      "Executable Installer: Package the application together with the Java Runtime Environment (JRE) into a standalone .exe installer for easy distribution and installation by end users.",
+    ],
   },
 };
