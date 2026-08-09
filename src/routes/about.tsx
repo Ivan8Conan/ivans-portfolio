@@ -238,6 +238,7 @@ function AboutPage() {
 
       <section className="mt-20">
         <SectionHeading index="06" title="Leadership & Activities" />
+        <div className="hidden" />
         <ul className="flex flex-col">
           {activities.map((a) => (
             <li
