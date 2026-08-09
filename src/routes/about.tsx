@@ -9,7 +9,14 @@ import {
   DialogTitle,
   DialogDescription,
 } from "@/components/ui/dialog";
-import { activities, certifications, competencies, education, profile } from "@/lib/portfolio-data";
+import {
+  activities,
+  certifications,
+  competencies,
+  education,
+  profile,
+  publications,
+} from "@/lib/portfolio-data";
 import type { Certification } from "@/lib/portfolio-data";
 
 export const Route = createFileRoute("/about")({
