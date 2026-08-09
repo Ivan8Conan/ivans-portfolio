@@ -237,9 +237,6 @@ function AboutPage() {
       </Dialog>
 
       <section className="mt-20">
-        <SectionHeading index="06" title="Leadership & Activities" />
-      </section>
-      <section className="mt-20">
         <SectionHeading index="06" title="Publications" />
         <ul className="flex flex-col">
           {publications.map((p) => (
