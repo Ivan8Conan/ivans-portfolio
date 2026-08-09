@@ -9,7 +9,14 @@ import {
   DialogTitle,
   DialogDescription,
 } from "@/components/ui/dialog";
-import { activities, certifications, competencies, education, profile } from "@/lib/portfolio-data";
+import {
+  activities,
+  certifications,
+  competencies,
+  education,
+  profile,
+  publications,
+} from "@/lib/portfolio-data";
 import type { Certification } from "@/lib/portfolio-data";
 
 export const Route = createFileRoute("/about")({
@@ -231,6 +238,39 @@ function AboutPage() {
 
       <section className="mt-20">
         <SectionHeading index="06" title="Leadership & Activities" />
+      </section>
+      <section className="mt-20">
+        <SectionHeading index="06" title="Publications" />
+        <ul className="flex flex-col">
+          {publications.map((p) => (
+            <li key={p.url} className="border-t border-border">
+              <a
+                href={p.url}
+                target="_blank"
+                rel="noreferrer noopener"
+                className="group flex w-full items-start gap-3 py-4 text-left text-sm leading-relaxed text-foreground transition-colors hover:text-accent focus:outline-none focus-visible:text-accent"
+              >
+                <span aria-hidden className="mt-2 h-px w-3 shrink-0 bg-accent" />
+                <span className="flex-1 underline-offset-4 group-hover:underline">
+                  {p.title}
+                  <span className="mt-1 block font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
+                    {p.meta}
+                  </span>
+                </span>
+                <span
+                  aria-hidden
+                  className="mt-0.5 font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground group-hover:text-accent"
+                >
+                  Open ↗
+                </span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      <section className="mt-20">
+        <SectionHeading index="07" title="Leadership & Activities" />
         <ul className="flex flex-col">
           {activities.map((a) => (
             <li

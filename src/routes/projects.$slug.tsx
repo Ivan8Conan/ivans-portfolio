@@ -5,6 +5,7 @@ import { TechPill } from "@/components/tech-pill";
 import { Reveal } from "@/components/reveal";
 import { Metric } from "@/components/metric";
 import { projectDetails, projects } from "@/lib/portfolio-data";
+import type { ProjectDetail } from "@/lib/portfolio-data";
 
 export const Route = createFileRoute("/projects/$slug")({
   loader: ({ params }) => {
@@ -51,7 +52,8 @@ export const Route = createFileRoute("/projects/$slug")({
 });
 
 function ProjectDetailPage() {
-  const { detail: d } = Route.useLoaderData();
+  const { detail } = Route.useLoaderData();
+  const d: ProjectDetail = detail;
   const currentIndex = projects.findIndex((p) => p.slug === d.slug);
   const next = currentIndex >= 0 ? projects[(currentIndex + 1) % projects.length] : null;
   const [showTopShortcut, setShowTopShortcut] = useState(false);
