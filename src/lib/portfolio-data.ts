@@ -1,5 +1,6 @@
 import type { Project } from "@/components/project-card";
 import certMbkm from "@/assets/cert-mbkm-msib.pdf.asset.json";
+import certHakCipta from "@/assets/cert-hakcipta.pdf.asset.json";
 import certClaudePlatform from "@/assets/cert-claude-platform-101.pdf.asset.json";
 import certClaudeCode from "@/assets/cert-claude-code-101.pdf.asset.json";
 import certAgents from "@/assets/cert-agents-workflows.pdf.asset.json";
@@ -189,6 +190,7 @@ export const certifications: Certification[] = [
   {
     title:
       "Intellectual Property Rights Certificate (Hak Cipta Kekayaan Intelektual) — MyDeadliftCoach App, 2026.",
+    file: { url: certHakCipta.url, type: "pdf" },
   },
   {
     title: "MBKM MSIB Batch 7 — Android Mobile Developer at MojadiApp, 2024.",
@@ -217,9 +219,26 @@ export const certifications: Certification[] = [
 ];
 
 export const activities = [
+  "",
+].filter(Boolean).concat([
   "Coordinator, Equipment & Security Division — Vihara Vidyaloka Buddhist Ceremonies (Waisak, Kathina Dana, Magha Puja), 2022–2023.",
   "Staff, Household Affairs Division — Vidyasena Vihara Vidyaloka, 2022–2023.",
   "Committee Member, Equipment & Security Division — FTI FEST × NVIDIA Event, 2024.",
+]);
+
+export type Publication = {
+  title: string;
+  meta: string;
+  url: string;
+};
+
+export const publications: Publication[] = [
+  {
+    title:
+      "Primary Dataset — Deadlift Movement Pose Estimation Research Dataset (Mendeley Data).",
+    meta: "DOI: 10.17632/w5prmmxyt9",
+    url: "https://dx.doi.org/10.17632/w5prmmxyt9",
+  },
 ];
 
 export type ProjectChallenge = {
