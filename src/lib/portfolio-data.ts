@@ -219,12 +219,10 @@ export const certifications: Certification[] = [
 ];
 
 export const activities = [
-  "",
-].filter(Boolean).concat([
   "Coordinator, Equipment & Security Division — Vihara Vidyaloka Buddhist Ceremonies (Waisak, Kathina Dana, Magha Puja), 2022–2023.",
   "Staff, Household Affairs Division — Vidyasena Vihara Vidyaloka, 2022–2023.",
   "Committee Member, Equipment & Security Division — FTI FEST × NVIDIA Event, 2024.",
-]);
+];
 
 export type Publication = {
   title: string;
