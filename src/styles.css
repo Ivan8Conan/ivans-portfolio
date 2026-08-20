@@ -283,3 +283,70 @@
     transition-duration: 0.001ms !important;
   }
 }
+
+/* ---------- Case study surface (premium dark scope) ---------- */
+
+.case-shell {
+  --background: oklch(0.16 0.012 265);
+  --foreground: oklch(0.97 0.004 260);
+  --card: oklch(0.205 0.014 265);
+  --card-foreground: oklch(0.97 0.004 260);
+  --popover: oklch(0.205 0.014 265);
+  --popover-foreground: oklch(0.97 0.004 260);
+  --primary: oklch(0.97 0.004 260);
+  --primary-foreground: oklch(0.16 0.012 265);
+  --secondary: oklch(0.245 0.016 265);
+  --secondary-foreground: oklch(0.97 0.004 260);
+  --muted: oklch(0.245 0.016 265);
+  --muted-foreground: oklch(0.72 0.014 262);
+  --accent: oklch(0.86 0.19 128);
+  --accent-foreground: oklch(0.16 0.012 265);
+  --border: oklch(1 0 0 / 12%);
+  --input: oklch(1 0 0 / 16%);
+  --ring: oklch(0.86 0.19 128);
+
+  background-color: var(--background);
+  color: var(--foreground);
+}
+
+@utility glass {
+  background: color-mix(in oklab, var(--color-card) 62%, transparent);
+  backdrop-filter: blur(14px) saturate(1.1);
+  border: 1px solid var(--color-border);
+}
+
+@utility hairline-grid {
+  background-image:
+    linear-gradient(to right, color-mix(in oklab, var(--color-border) 70%, transparent) 1px, transparent 1px),
+    linear-gradient(to bottom, color-mix(in oklab, var(--color-border) 70%, transparent) 1px, transparent 1px);
+  background-size: 56px 56px;
+}
+
+@utility glow-accent {
+  box-shadow:
+    0 0 0 1px color-mix(in oklab, var(--color-accent) 35%, transparent),
+    0 18px 60px -30px color-mix(in oklab, var(--color-accent) 60%, transparent);
+}
+
+@keyframes pipeline-pulse {
+  0% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  35% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+}
+
+@utility pipeline-pulse {
+  animation: pipeline-pulse 2.6s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+.case-shell ::selection {
+  background-color: var(--accent);
+  color: var(--accent-foreground);
+}
