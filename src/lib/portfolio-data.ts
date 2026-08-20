@@ -670,3 +670,393 @@ export const projectDetails: Record<string, ProjectDetail> = {
     ],
   },
 };
+
+/* ============================================================
+ * Case-study presentation layer
+ * Data-driven config consumed by the shared project-detail system.
+ * All content below is derived strictly from the project data above.
+ * ========================================================== */
+
+export type FlowStep = {
+  label: string;
+  tech?: string;
+  note: string;
+};
+
+export type ArchNode = {
+  name: string;
+  responsibility: string;
+  tech: string;
+  decision?: string;
+};
+
+export type TechnicalDecision = {
+  decision: string;
+  why: string;
+  tradeoff: string;
+};
+
+export type CaseStudyExtra = {
+  category: string;
+  valueProp: string;
+  heroVisual: "ml" | "mobile" | "web" | "desktop";
+  /** short factual stats rendered inside the hero visual */
+  heroStats?: { k: string; v: string }[];
+  flow: FlowStep[];
+  architecture: ArchNode[];
+  decisions: TechnicalDecision[];
+  /** current state label for the roadmap; next/future come from `future` */
+  roadmapCurrent: string;
+  links?: { label: string; href: string }[];
+};
+
+export const caseStudyExtras: Record<string, CaseStudyExtra> = {
+  mydeadliftcoach: {
+    category: "Applied Computer Vision · On-device ML",
+    valueProp: "Coach-grade deadlift feedback in 3–7 ms, fully offline on a mid-range phone.",
+    heroVisual: "ml",
+    heroStats: [
+      { k: "accuracy", v: "86.7%" },
+      { k: "latency", v: "3–7 ms" },
+      { k: "ram", v: "13.2 MB" },
+      { k: "frames", v: "21,813" },
+    ],
+    flow: [
+      {
+        label: "Camera frame",
+        tech: "Flutter camera",
+        note: "Frames captured with adaptive throttling — 6 FPS idle, 20 FPS active.",
+      },
+      {
+        label: "Gatekeeper FSM",
+        tech: "Dart",
+        note: "Finite State Machine decides IDLE/ACTIVE and skips frames to cap thermal load.",
+      },
+      {
+        label: "Pose keypoints",
+        tech: "MediaPipe Pose",
+        note: "Lightweight pose estimation stable on mid-range ARM devices; auto side-detection locks the dominant side.",
+      },
+      {
+        label: "Feature extraction",
+        tech: "Welford's algorithm",
+        note: "Spatio-temporal features (knee/hip/back angles) computed in a single pass at O(1) memory.",
+      },
+      {
+        label: "Classification",
+        tech: "Gradient Boosting → native Dart",
+        note: "Model decapsulated from Python .pkl into native if-else logic, executed on a background Isolate.",
+      },
+      {
+        label: "Terminal feedback",
+        tech: "TTS (Bahasa Indonesia)",
+        note: "High-contrast visual plus spoken cue of ≤15 words right after each repetition.",
+      },
+      {
+        label: "Session log",
+        tech: "SQLite",
+        note: "Local micro RDBMS (<1 MB) storing session metadata with cascade-delete rules.",
+      },
+    ],
+    architecture: [
+      {
+        name: "Capture layer",
+        responsibility: "Camera stream, frame pacing, side locking.",
+        tech: "Flutter · camera plugin",
+        decision: "Adaptive frame throttling instead of raw 60 FPS to prevent thermal throttling.",
+      },
+      {
+        name: "Gatekeeper FSM",
+        responsibility: "IDLE/ACTIVE state control and frame skipping.",
+        tech: "Dart",
+        decision: "A state machine keeps inference off the CPU when no repetition is in progress.",
+      },
+      {
+        name: "Pose engine",
+        responsibility: "Extracts body keypoints per frame.",
+        tech: "MediaPipe Pose",
+        decision: "Lightweight model chosen for mid-range ARM stability over heavier pose networks.",
+      },
+      {
+        name: "Inference Isolate",
+        responsibility: "Runs the classifier off the main thread.",
+        tech: "Dart Isolate (AOT)",
+        decision: "Native Dart execution removes the TensorFlow Lite interpreter dependency.",
+      },
+      {
+        name: "Feedback layer",
+        responsibility: "Renders visual cue and speaks the correction.",
+        tech: "Flutter UI · TTS",
+        decision: "Terminal feedback after each rep rather than continuous chatter.",
+      },
+      {
+        name: "Local store",
+        responsibility: "Persists session history offline.",
+        tech: "SQLite",
+        decision: "No cloud dependency — privacy-preserving and works without connectivity.",
+      },
+    ],
+    decisions: [
+      {
+        decision: "Compute features with Welford's algorithm instead of buffering frames.",
+        why: "Stacking every frame's keypoints to derive mean/std produced O(n) memory growth per repetition.",
+        tradeoff:
+          "Tighter mathematical precision required in code architecture versus library primitives.",
+      },
+      {
+        decision: "Decapsulate the Gradient Boosting model into native Dart on a background Isolate.",
+        why: "Classification on the main thread queued behind camera rendering and froze the UI.",
+        tradeoff: "More async state management and inter-thread message passing.",
+      },
+      {
+        decision: "Gate inference behind an FSM with adaptive frame throttling.",
+        why: "High-resolution 60 FPS inference overheated the device and triggered CPU throttling.",
+        tradeoff: "Temporal context can be lost if frame skipping is not calibrated at motion peaks.",
+      },
+    ],
+    roadmapCurrent: "Published on Google Play Store · TKT Level 8",
+  },
+  tastivo: {
+    category: "Mobile E-Commerce · Firebase BaaS",
+    valueProp: "Two Flutter clients kept in millisecond sync by a single realtime source of truth.",
+    heroVisual: "mobile",
+    heroStats: [
+      { k: "clients", v: "User + Admin" },
+      { k: "backend", v: "Firebase BaaS" },
+      { k: "program", v: "MSIB Batch 7" },
+    ],
+    flow: [
+      {
+        label: "User action",
+        tech: "Flutter UI",
+        note: "Cart add or catalog edit performed in the User or Admin client.",
+      },
+      {
+        label: "CRUD operation",
+        tech: "Dart service layer",
+        note: "Write mapped onto the NoSQL JSON schema for products and cart modules.",
+      },
+      {
+        label: "Realtime Database",
+        tech: "Firebase Realtime DB",
+        note: "Single source of truth for catalog and cart, avoiding Admin/User data latency.",
+      },
+      {
+        label: "Broadcast",
+        tech: "Firebase listeners",
+        note: "Every connected client receives the change on-screen within milliseconds.",
+      },
+      {
+        label: "Notify",
+        tech: "Firebase Cloud Messaging",
+        note: "Push notification layer informs users of relevant updates.",
+      },
+    ],
+    architecture: [
+      {
+        name: "User app",
+        responsibility: "Catalog browsing, search, wishlist, cart, order history.",
+        tech: "Flutter · Dart",
+      },
+      {
+        name: "Admin app",
+        responsibility: "Product CRUD and transaction monitoring for store owners.",
+        tech: "Flutter · Dart",
+      },
+      {
+        name: "Realtime Database",
+        responsibility: "Transactional catalog and cart state shared by both clients.",
+        tech: "Firebase Realtime DB",
+        decision: "NoSQL JSON schema chosen over a relational DB to remove client-side sync latency.",
+      },
+      {
+        name: "Auth & recovery",
+        responsibility: "Login, register, and single-use expiring password reset links.",
+        tech: "Firebase Auth · Storage",
+        decision: "Email-issued single-use link verifies identity without an active session.",
+      },
+      {
+        name: "Storage",
+        responsibility: "Product imagery and reset-flow assets.",
+        tech: "Firebase Storage",
+      },
+      {
+        name: "Messaging",
+        responsibility: "Push notification delivery.",
+        tech: "Firebase Cloud Messaging",
+      },
+    ],
+    decisions: [
+      {
+        decision: "Use Firebase Realtime Database as the single source of truth.",
+        why: "Simultaneous user and admin edits risked race conditions and cart/stock mismatch.",
+        tradeoff: "Requires tight NoSQL schema discipline to avoid bandwidth blow-up.",
+      },
+      {
+        decision: "Email-based single-use reset link with expiry.",
+        why: "Identity has to be verified without an active login session.",
+        tradeoff: "Depends on inbox access and a stable internet connection.",
+      },
+    ],
+    roadmapCurrent: "MVP delivered · final report for MSIB Batch 7 at MojadiApp",
+  },
+  "concert-ticket-booking": {
+    category: "Full-Stack Web · PHP / MySQL",
+    valueProp: "Concert discovery, filtered search, and booking on a hardened PHP/MySQL stack.",
+    heroVisual: "web",
+    heroStats: [
+      { k: "module owned", v: "Booking detail" },
+      { k: "stack", v: "PHP · MySQL" },
+      { k: "team", v: "Group of 4" },
+    ],
+    flow: [
+      {
+        label: "Browse catalog",
+        tech: "HTML · CSS · JS",
+        note: "Concert list rendered dynamically with image, schedule, location, and price.",
+      },
+      {
+        label: "Filter & search",
+        tech: "JavaScript",
+        note: "Filtering by keyword, genre (Pop, Rock, Jazz), location, and date.",
+      },
+      {
+        label: "Detail request",
+        tech: "detail.php?id=X",
+        note: "Selected concert ID sent to the server through the URL parameter.",
+      },
+      {
+        label: "Server lookup",
+        tech: "PHP prepared statements",
+        note: "SELECT * FROM konser WHERE id = ? with bind_param() to block SQL injection.",
+      },
+      {
+        label: "Booking submit",
+        tech: "pemesanan.php",
+        note: "Booking form with seat-type selection validated server-side before persistence.",
+      },
+      {
+        label: "Persist",
+        tech: "MySQL",
+        note: "Booking history stored in the relational schema alongside users and catalog.",
+      },
+    ],
+    architecture: [
+      {
+        name: "Browser client",
+        responsibility: "Catalog UI, dropdowns, form validation.",
+        tech: "HTML · CSS · JavaScript",
+      },
+      {
+        name: "PHP application",
+        responsibility: "Business logic, routing, and UI↔DB bridging.",
+        tech: "Apache · PHP",
+      },
+      {
+        name: "Session auth",
+        responsibility: "Login and register with hashed credentials.",
+        tech: "session_start() · password_hash()",
+        decision: "password_hash()/password_verify() instead of storing raw credentials.",
+      },
+      {
+        name: "Data access",
+        responsibility: "Parameterised reads and writes.",
+        tech: "PHP prepared statements",
+        decision: "prepare/bind_param/execute chosen over string-interpolated queries.",
+      },
+      {
+        name: "MySQL",
+        responsibility: "Users, concert catalog, booking history.",
+        tech: "MySQL",
+      },
+    ],
+    decisions: [
+      {
+        decision: "Route every detail lookup through prepared statements.",
+        why: "Injecting $_GET['id'] straight into SQL is exploitable from the URL.",
+        tradeoff: "More code and complexity than raw queries.",
+      },
+    ],
+    roadmapCurrent: "Prototype delivered with stable CRUD · documented on GitHub",
+  },
+  memby: {
+    category: "Desktop Application · Java Backend",
+    valueProp: "Tracks paid-subscription lifecycles and warns before an auto-renewal lands.",
+    heroVisual: "desktop",
+    heroStats: [
+      { k: "architecture", v: "2-tier" },
+      { k: "layer owned", v: "Backend + data" },
+      { k: "team", v: "Group of 4" },
+    ],
+    flow: [
+      {
+        label: "User input",
+        tech: "JavaFX · FXML",
+        note: "Subscription details entered through the declarative FXML interface.",
+      },
+      {
+        label: "Controller",
+        tech: "Java",
+        note: "Controller layer separates the view from application logic under MVC.",
+      },
+      {
+        label: "DAO layer",
+        tech: "Java DAO",
+        note: "Encapsulates all subscription CRUD operations against the data layer.",
+      },
+      {
+        label: "JDBC write",
+        tech: "JDBC prepared statements",
+        note: "INSERT/UPDATE executed safely without exposure to SQL injection.",
+      },
+      {
+        label: "MySQL",
+        tech: "MySQL",
+        note: "Relational store for service name, billing cycle, and expiry dates.",
+      },
+      {
+        label: "Reminder & refresh",
+        tech: "Platform.runLater()",
+        note: "Background date checks push notifications and refresh the TableView without blocking the UI thread.",
+      },
+    ],
+    architecture: [
+      {
+        name: "FXML view",
+        responsibility: "Dashboard and subscription forms.",
+        tech: "JavaFX · FXML",
+        decision: "FXML separates visual design from Java controller logic.",
+      },
+      {
+        name: "Controller",
+        responsibility: "Translates UI events into service calls.",
+        tech: "Java",
+      },
+      {
+        name: "DAO / service",
+        responsibility: "Subscription CRUD and query composition.",
+        tech: "Java · JDBC",
+        decision: "Prepared statements used for every CRUD path.",
+      },
+      {
+        name: "MySQL",
+        responsibility: "Persistent subscription records and expiry dates.",
+        tech: "MySQL",
+      },
+      {
+        name: "Reminder task",
+        responsibility: "Checks approaching expiry dates and raises notifications.",
+        tech: "Background task · Platform.runLater()",
+        decision: "Concurrency keeps date-diff queries off the JavaFX Application Thread.",
+      },
+    ],
+    decisions: [
+      {
+        decision: "Run reminder date checks on a background task and surface them via Platform.runLater().",
+        why: "Continuous date-diff checks or synchronous queries would block the JavaFX Application Thread.",
+        tradeoff: "More complex thread management to avoid ConcurrencyException.",
+      },
+    ],
+    roadmapCurrent: "MVP prototype running the full lifecycle flow · GitHub-managed",
+  },
+};
